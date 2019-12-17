@@ -24,11 +24,11 @@ for i in range(number):
             # 꺼낸 값을 최소 힙에 다시 넣고, 현재 값을 최대 힙에 넣음
             temp = heapq.heappop(min_heap)
             if temp < input_num:
-                heapq.heappush(min_heap, input_num)
-                heapq.heappush(max_heap, (-temp, temp))
+                heapq.heappush(min_heap, input_num) # 오름차순 힙
+                heapq.heappush(max_heap, (-temp, temp)) # 내림차순 힙
             else:
-                heapq.heappush(min_heap, temp)
-                heapq.heappush(max_heap, (-input_num, input_num))
+                heapq.heappush(min_heap, temp) # 오름차순 힙
+                heapq.heappush(max_heap, (-input_num, input_num)) # 내림차순 힙
     elif len(max_heap) > len(min_heap): # 최대 힙의 크기가 더 크면?
         # 최대 힙에서 꺼내어서 현재 값보다 크면,
         # 최대 힙에 현재 값을 넣고, 꺼낸 값을 최소 힙에 넣는다.
@@ -46,5 +46,5 @@ for i in range(number):
     # 최대 힙에서 빼서 확인 후 다시 넣기 반복
     # top이 없어서 이짓 반복
     final = heapq.heappop(max_heap)[1]
-    #print(final)
+    print(final)
     heapq.heappush(max_heap, (-final, final))

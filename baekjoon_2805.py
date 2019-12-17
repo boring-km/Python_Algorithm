@@ -12,8 +12,6 @@ for i in range(n):
 a.sort() # [10, 15, 17, 20]
 # 절단기를 설치할 높이의 범위 -> 구하려는 건 최댓값
 left, right, res, size = 0, a[-1], 0, len(a)
-temp = 0
-mid = int((left+right)/2)
 while right - left >= 0:
     want = 0
     mid = int((left+right)/2)
