@@ -27,7 +27,6 @@ timetable = ["23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:59", "23:
 '''
 def solution(n, t, m, timetable):
     time = "09:00"
-    answer = ''
     hour = int(time[0:2])
     minu = int(time[3:5])
     time = hour * 100 + minu
