@@ -2,52 +2,47 @@ import sys
 ## 입력을 빠르게 하기 위한 함수
 input = sys.stdin.readline
 
-data = int(input())
-ar = [0] * 4001
-ar2 = [0] * 4001
+n = int(input())
+a = []
+for i in range(n):
+    a.append(int(input()))
 
-b = []
-max = 0
-for i in range(data):
-    d = int(input())
-    b.append(d)
-    if d < 0:
-        ar[-d] += 1
-        if max < ar[-d]:
-            max = ar[-d]
+# result 1 : 산술평균
+print(round(sum(a) / n))
+
+# result 2 : 중앙값
+a.sort()
+print(a[int(n/2)])
+
+# result 4 : 범위
+ran = a[-1] - a[0]
+
+# result 3 : 최빈값
+b = [0] * 10000
+maxi = 0
+for i in range(n):
+    cur = 0
+    if a[i] < 0:
+        cur += 5000 + a[i]*(-1)
     else:
-        ar2[d] += 1
-        if max < ar2[d]:
-            max = ar2[d]
-s = 0
-res = []
-for i in range(4001):
-    if ar[i] != 0:
-        s -= i * ar[i]
-        print(s)
-    elif ar2[i] != 0:
-        s += i * ar2[i]
-    if max == ar[i]:
-        res.append(-i)
-    elif max == ar2[i]:
-        res.append(i)
-b.sort()
-res.sort()
+        cur += a[i]
+    b[cur] += 1
+    if maxi < b[cur]:
+        maxi = b[cur]
+c = []
+for i in range(10000):
+    if b[i] != 0:
+        if b[i] == maxi:
+            if i >= 5000:
+                c.append((i-5000)*(-1))
+            else:
+                c.append(i)
+c = list(set(c))
+c.sort()
+if len(c) == 1:
+    print(c[0])
+else:
+    print(c[1])
 
-avg = int(s / data)
-#print("평균: ", avg, s / data, s)
-if avg < 0:
-    if s / data <= avg - 0.5:
-        avg -= 1
-else:
-    if s / data >= avg + 0.5:
-        avg += 1
-mid = b[int(data/2)]
-print(avg) # 산술평균
-print(mid) # 중앙값
-# 최빈값
-if len(res) == 1:
-    print(res[0])
-else:
-    print(res[1])
-print(b[-1] - b[0]) # 범위
+# result 4 : 범위
+print(ran)
